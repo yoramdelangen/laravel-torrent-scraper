@@ -1,10 +1,12 @@
 {
   "name": "yoramdelangen/laravel-torrent-scraper",
-  "description": "Provide an abstraction to seach for torrent files on many websites.",
+  "description": "Provide an abstraction to seach for torrent files on many websites, and cloudflare by-pass.",
   "keywords": [
     "torrent",
     "piratebay",
-    "kickass"
+    "kickass",
+    "torrentz2",
+    "eztv"
   ],
   "license": "MIT",
   "homepage": "https://github.com/yoramdelangen/laravel-torrent-scraper",
@@ -13,6 +15,12 @@
       "name": "Fernando Carletti",
       "email": "contato@fernandocarletti.net",
       "homepage": "http://fernandocarletti.net",
+      "role": "Developer"
+    },
+    {
+      "name": "Yoram de Langen",
+      "email": "yoramdelangen@gmail.com",
+      "homepage": "https://yoramdelangen.nl",
       "role": "Developer"
     }
   ],
