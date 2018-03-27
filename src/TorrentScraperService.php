@@ -2,6 +2,7 @@
 
 namespace Xurumelous\TorrentScraper;
 
+use GuzzleHttp\Cookie\FileCookieJar;
 use Xurumelous\TorrentScraper\Entity\SearchResult;
 
 class TorrentScraperService
@@ -30,7 +31,7 @@ class TorrentScraperService
     {
         if (!$adapter->getHttpClient())
         {
-            $adapter->setHttpClient(new \GuzzleHttp\Client());
+            $adapter->setHttpClient(new \GuzzleHttp\Client(['cookies' => new FileCookieJar('cookies.txt')]));
         }
 
         $this->adapters[] = $adapter;

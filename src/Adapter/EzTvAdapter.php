@@ -2,15 +2,21 @@
 
 namespace Xurumelous\TorrentScraper\Adapter;
 
+use Tuna\CloudflareMiddleware;
 use GuzzleHttp\Exception\ClientException;
-use Xurumelous\TorrentScraper\AdapterInterface;
-use Xurumelous\TorrentScraper\HttpClientAware;
-use Xurumelous\TorrentScraper\Entity\SearchResult;
 use Symfony\Component\DomCrawler\Crawler;
+use Xurumelous\TorrentScraper\HttpClientAware;
+use Xurumelous\TorrentScraper\AdapterInterface;
+use Xurumelous\TorrentScraper\Entity\SearchResult;
 
 class EzTvAdapter implements AdapterInterface
 {
     use HttpClientAware;
+
+    public function havingCloudflareBypass(): bool
+    {
+        return false;
+    }
 
     /**
      * @var array
@@ -33,22 +39,25 @@ class EzTvAdapter implements AdapterInterface
      */
     public function search($query)
     {
+        // $this->httpClient->getConfig('handler')->push(CloudflareMiddleware::create());
+
         try {
             $response = $this->httpClient->get('https://eztv.ag/search/' . $this->transformSearchString($query));
         } catch (ClientException $e) {
             return [];
         }
-        
+
         $crawler = new Crawler((string) $response->getBody());
         $items = $crawler->filter('tr.forum_header_border');
         $results = [];
 
         foreach ($items as $item) {
-            $result = new SearchResult();
+            $result = new SearchResult('EzTv');
             $itemCrawler = new Crawler($item);
             $result->setName(trim($itemCrawler->filter('td')->eq(1)->text()));
-            $result->setSeeders($this->options['seeders']);
+            $result->setSeeders($itemCrawler->filter('.forum_thread_post')->eq(5)->text());
             $result->setLeechers($this->options['leechers']);
+            $result->setTorrentAge($itemCrawler->filter('.forum_thread_post')->eq(4)->text());
 
             $node = $itemCrawler->filter('a.download_1');
             if ($node->count() > 0) {

@@ -11,6 +11,10 @@ class KickassTorrentsAdapter implements AdapterInterface
 {
     use HttpClientAware;
 
+    public function havingCloudflareBypass(): bool
+    {
+        return false;
+    }
     /**
      * @param array $options
      */
@@ -55,11 +59,12 @@ class KickassTorrentsAdapter implements AdapterInterface
 
             $data = json_decode(str_replace("'", '"', $itemCrawler->filter('div[data-sc-params]')->attr('data-sc-params')));
 
-            $result = new SearchResult();
+            $result = new SearchResult('KickassTorrents');
             $result->setName($name);
             $result->setSeeders((int) $itemCrawler->filter('td:nth-child(5)')->text());
             $result->setLeechers((int) $itemCrawler->filter('td:nth-child(6)')->text());
             $result->setMagnetUrl($data->magnet);
+            $result->setTorrentAge($itemCrawler->filter('td:nth-child(4)')->text());
 
             $results[] = $result;
         }

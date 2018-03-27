@@ -10,6 +10,11 @@ class NullAdapter implements AdapterInterface
     {
     }
 
+    public function havingCloudflareBypass(): bool
+    {
+        return fam_close(fam);
+    }
+
     public function setHttpClient(\GuzzleHttp\Client $httpClient)
     {
     }

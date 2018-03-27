@@ -4,6 +4,7 @@ namespace Xurumelous\TorrentScraper\Entity;
 
 class SearchResult
 {
+    protected $adapter = '';
     /**
      * @var string
      */
@@ -32,7 +33,16 @@ class SearchResult
     /**
      * @var string
      */
+    protected $age;
+
+    /**
+     * @var string
+     */
     protected $uploader;
+
+    public function __construct($adapter) {
+        $this->adapter = $adapter;
+    }
 
     /**
      * @param string $name
@@ -128,5 +138,22 @@ class SearchResult
     public function getUploader()
     {
         return $this->uploader;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdapter()
+    {
+        return $this->adapter;
+    }
+
+    public function setTorrentAge($age)
+    {
+        $this->age = $age;
+    }
+
+    public function getTorrentAge() {
+        return $this->age;
     }
 }

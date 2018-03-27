@@ -31,4 +31,6 @@ interface AdapterInterface
      * @param string $query
      */
     public function search($query);
+
+    public function havingCloudflareBypass(): bool;
 }
