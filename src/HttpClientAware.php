@@ -1,6 +1,6 @@
 <?php
 
-namespace Xurumelous\TorrentScraper;
+namespace Yoramdelangen\TorrentScraper;
 
 use GuzzleHttp\Client;
 

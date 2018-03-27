@@ -1,8 +1,8 @@
 <?php
 
-namespace Xurumelous\TorrentScraper\Adapter;
+namespace Yoramdelangen\TorrentScraper\Adapter;
 
-use Xurumelous\TorrentScraper\AdapterInterface;
+use Yoramdelangen\TorrentScraper\AdapterInterface;
 
 class NullAdapter implements AdapterInterface
 {

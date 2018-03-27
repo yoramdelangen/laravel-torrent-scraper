@@ -1,9 +1,9 @@
 <?php
 
-namespace Xurumelous\TorrentScraper;
+namespace Yoramdelangen\TorrentScraper;
 
 use GuzzleHttp\Cookie\FileCookieJar;
-use Xurumelous\TorrentScraper\Entity\SearchResult;
+use Yoramdelangen\TorrentScraper\Entity\SearchResult;
 
 class TorrentScraperService
 {

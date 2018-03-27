@@ -1,13 +1,13 @@
 <?php
 
-namespace Xurumelous\TorrentScraper\Adapter;
+namespace Yoramdelangen\TorrentScraper\Adapter;
 
 use Tuna\CloudflareMiddleware;
 use GuzzleHttp\Exception\ClientException;
 use Symfony\Component\DomCrawler\Crawler;
-use Xurumelous\TorrentScraper\HttpClientAware;
-use Xurumelous\TorrentScraper\AdapterInterface;
-use Xurumelous\TorrentScraper\Entity\SearchResult;
+use Yoramdelangen\TorrentScraper\HttpClientAware;
+use Yoramdelangen\TorrentScraper\AdapterInterface;
+use Yoramdelangen\TorrentScraper\Entity\SearchResult;
 
 class ThePirateBayAdapter implements AdapterInterface
 {
@@ -60,7 +60,6 @@ class ThePirateBayAdapter implements AdapterInterface
             $result->setSeeders((int) $itemCrawler->filter('td')->eq(2)->text());
             $result->setLeechers((int) $itemCrawler->filter('td')->eq(3)->text());
             $result->setMagnetUrl($itemCrawler->filterXpath('//tr/td/a')->attr('href'));
-
             $result->setTorrentAge($this->getTorrentAge($itemCrawler));
 
             $uploader = null;

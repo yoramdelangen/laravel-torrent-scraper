@@ -1,13 +1,13 @@
 <?php
 
-namespace Xurumelous\TorrentScraper\Adapter;
+namespace Yoramdelangen\TorrentScraper\Adapter;
 
 use Tuna\CloudflareMiddleware;
 use GuzzleHttp\Exception\ClientException;
 use Symfony\Component\DomCrawler\Crawler;
-use Xurumelous\TorrentScraper\HttpClientAware;
-use Xurumelous\TorrentScraper\AdapterInterface;
-use Xurumelous\TorrentScraper\Entity\SearchResult;
+use Yoramdelangen\TorrentScraper\HttpClientAware;
+use Yoramdelangen\TorrentScraper\AdapterInterface;
+use Yoramdelangen\TorrentScraper\Entity\SearchResult;
 
 class EzTvAdapter implements AdapterInterface
 {
