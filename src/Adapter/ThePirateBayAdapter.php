@@ -43,30 +43,42 @@ class ThePirateBayAdapter implements AdapterInterface
 
         $crawler = new Crawler((string) $response->getBody());
         $items = $crawler->filter('#searchResult tr');
+
         $results = [];
         $first = true;
 
         foreach ($items as $item) {
+            if (str_contains($item->nodeValue, 'HIDE MY IP NOW')) {
+                continue;
+            }
+
             // Ignore the first row, the header
             if ($first) {
                 $first = false;
                 continue;
             }
 
-
-            $result = new SearchResult('ThePirateBay');
-            $itemCrawler = new Crawler($item);
-            $result->setName(trim($itemCrawler->filter('.detName')->text()));
-            $result->setSeeders((int) $itemCrawler->filter('td')->eq(2)->text());
-            $result->setLeechers((int) $itemCrawler->filter('td')->eq(3)->text());
-            $result->setMagnetUrl($itemCrawler->filterXpath('//tr/td/a')->attr('href'));
-            $result->setTorrentAge($this->getTorrentAge($itemCrawler));
-
-            $uploader = null;
             try {
-               $uploader = $itemCrawler->filter('.detDesc a')->text();
-            } catch (\InvalidArgumentException $e) {
-                // Handle the current node list is empty..
+                $result = new SearchResult('ThePirateBay');
+                $itemCrawler = new Crawler($item);
+
+                if (count($itemCrawler->filter('.detName')) === 0) {
+                    continue;
+                }
+
+                $result->setName(trim($itemCrawler->filter('.detName')->text()));
+                $result->setSeeders((int) $itemCrawler->filter('td')->eq(2)->text());
+                $result->setLeechers((int) $itemCrawler->filter('td')->eq(3)->text());
+                $result->setMagnetUrl($itemCrawler->filterXpath('//tr/td/a')->attr('href'));
+                $result->setTorrentAge($this->getTorrentAge($itemCrawler));
+
+                $uploader = null;
+                $uploader = $itemCrawler->filter('.detDesc a')->text();
+            // } catch (\InvalidArgumentException $e) {
+            //     // Handle the current node list is empty..
+            //     dd($e->getMessage());q
+            } catch (\Exception $e) {
+                dd($e);
             }
             $result->setUploader($uploader);
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Xurumelous\TorrentScraper\Adapter;
+namespace Yoramdelangen\TorrentScraper\Adapter;
 
-use Xurumelous\TorrentScraper\AdapterInterface;
-use Xurumelous\TorrentScraper\HttpClientAware;
-use Xurumelous\TorrentScraper\Entity\SearchResult;
+use Yoramdelangen\TorrentScraper\AdapterInterface;
+use Yoramdelangen\TorrentScraper\HttpClientAware;
+use Yoramdelangen\TorrentScraper\Entity\SearchResult;
 use Symfony\Component\DomCrawler\Crawler;
 
 class KickassTorrentsAdapter implements AdapterInterface

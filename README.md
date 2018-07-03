@@ -8,21 +8,24 @@ This library provides an abstraction to search for torrent files accross some to
 
 ## Usage
 ```php
-<?php
-
-$scraperService = new \Xurumelous\TorrentScraper\TorrentScrapperService(['ezTv', 'kickassTorrents']);
+$scraperService = new \Yoramde\TorrentScraper\TorrentScrapperService(['ezTv', 'kickassTorrents']);
 $results = $scraperService->search('elementaryos');
 
 foreach ($results as $result) {
-	$result->getName();
+    $result->getName();
     $result->getSeeders();
     $result->getLeechers();
     $result->getTorrentUrl();
     $result->getMagnetUrl();
+    $result->getTorrentAge();
 }
 ```
 
 ## Available adapters
-* [ezTv](https://eztv.ag/)
-* [kickassTorrents](http://kickass.to)
-* [thePirateBay](http://thepiratebay.se)
+* ezTv
+* kickassTorrents
+* thePirateBay
+* torrentZ2
+* more?
+
+> Adapters inspired from: https://github.com/JimmyLaurent/torrent-search-api
